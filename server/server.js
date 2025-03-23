@@ -114,6 +114,32 @@ io.on('connection', (socket) => {
     io.to(room).emit('gameUpdate', game);
   });
 
+  socket.on('leaveGame', ({ room, name }) => {
+    socket.leave(room);
+    console.log(`Socket ${socket.id} left room ${room}`);
+
+    // Remove player from game
+    if (games[room]) {
+      const idx = games[room].players.findIndex(p => p.id === socket.id);
+      if (idx !== -1) {
+        games[room].players.splice(idx, 1);
+        // Reset game if no players left
+        if (games[room].players.length === 0) {
+          delete games[room];
+        } else {
+          // If game has less than 2 players, end the game and declare the remaining player as the winner
+          if (games[room].players.length === 1) {
+            games[room].status = 'won';
+            games[room].winner = games[room].players[0].mark;
+          } else {
+            resetGame(games[room]);
+          }
+          io.to(room).emit('gameUpdate', games[room]);
+        }
+      }
+    }
+  })
+
   socket.on('disconnect', () => {
     console.log('Client disconnected:', socket.id);
     // Remove disconnected player from any game
