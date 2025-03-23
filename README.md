@@ -59,3 +59,6 @@ npm run dev
 5. Click on the board to make your moves. The game will display the next turn, and notify when someone wins or if the game is a draw.
 6. When the game ends, click **Reset Game** to play again. 
 
+## Authors
+- Minh Phung - [GitHub](https://github.com/minhphung152)
+- Duc Nguyen - [GitHub](https://github.com/nguyenbanhducA1K51)
