@@ -35,15 +35,15 @@ cd server
 npm install
 ```
 
-3. Navigate to the `client` folder and install dependencies
+3. Start the server
+```bash
+node server.js
+```
+
+4. Navigate to the `client` folder and install dependencies
 ```bash
 cd client
 npm install
-```
-
-4. Start the server
-```bash
-node server.js
 ```
 
 5. Start the client application
